@@ -1,0 +1,13 @@
+jupyterlab
+matplotlib
+numpy
+opencv-python
+pandas
+pillow
+seaborn
+torchinfo
+
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch
+torchvision
+torchaudio
