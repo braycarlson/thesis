@@ -1,13 +1,33 @@
+-e .
+
+albumentations
+ipywidgets
+joblib
 jupyterlab
+manim
 matplotlib
+natsort
+netron
 numpy
-opencv-python
+opencv-contrib-python
+optuna
 pandas
 pillow
+lightning[extra]
+raster_geometry
+SciencePlots
+scikit-learn
+scipy
+screeninfo
 seaborn
-torchinfo
+tables
+# torchinfo
+tensorboard
+tensorflow
+torchmetrics[detection]
+tqdm
+typing-extensions
 
 --extra-index-url https://download.pytorch.org/whl/cu118
 torch
 torchvision
-torchaudio

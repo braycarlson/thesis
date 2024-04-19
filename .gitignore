@@ -1,12 +1,28 @@
 # thesis
+dataset/
 latex/
+mnist/
+notes/
+output/
+textbook/
+
+thesis/analysis/
+thesis/animation/
+thesis/a/examples/
+thesis/a/tensorboard/
+thesis/b/examples/
+thesis/b/tensorboard/
+thesis/scratchpad
 
 *.7z
 *.bat
-*.xlsx
-*.zip
+*.hdf
+*.pkl
+*.pickle
 *.sublime-project
 *.sublime-workspace
+*.xlsx
+*.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
