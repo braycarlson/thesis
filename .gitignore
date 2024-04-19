@@ -1,5 +1,6 @@
 # thesis
-dataset/
+/dataset/
+
 latex/
 mnist/
 notes/

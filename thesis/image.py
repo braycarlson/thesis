@@ -6,13 +6,13 @@ from PIL import Image
 
 
 def to_transparent(image: Image.Image) -> Image.Image:
-    """Convert an image to have transparent background.
+    """Convert an image to have a transparent background.
 
     Args:
         image: The image to be converted.
 
     Returns:
-        An image with transparent background.
+        An image with a transparent background.
 
     """
 
