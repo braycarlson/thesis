@@ -7,6 +7,16 @@ from screeninfo import get_monitors
 
 
 def walk(file: Path) -> Path | None:
+    """Find the root of the project from the "venv".
+
+    Args:
+        file: The starting path to search for the "venv".
+
+    Returns:
+        A path to the root directory, if found, None otherwise.
+
+    """
+
     for parent in [file, *file.parents]:
         if parent.is_dir():
             path = parent.joinpath('venv')

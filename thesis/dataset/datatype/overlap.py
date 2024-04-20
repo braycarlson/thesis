@@ -30,7 +30,7 @@ class OverlapStrategy(ABC):
     def __init__(
         self,
         amount: int = 1,
-        anchor: list[int] | None = (8, 16, 32, 64),
+        default: list[int] | None = (8, 16, 32, 64),
         base: str | Path | None = None,
         overlap_rate: float = 0.10,
         partition: dict[str, list[str | Path]] | None = None,
@@ -40,7 +40,7 @@ class OverlapStrategy(ABC):
 
         Args:
             amount: The number of clusters to generate.
-            anchor: The anchor sizes for background boxes.
+            default: The default sizes for background boxes.
             base: The base directory for saving images.
             overlap_rate: The overlap rate threshold.
             partition: The partition of the dataset.
@@ -51,7 +51,7 @@ class OverlapStrategy(ABC):
         width, height = canvas
 
         self.amount = amount
-        self.anchor = anchor
+        self.default = default
         self.base = base
         strategy = ScalarStrategy(width, height)
         self.converter = CoordinatesConverter(strategy)
@@ -73,13 +73,13 @@ class OverlapStrategy(ABC):
         """Paste an image onto a background.
 
         Args:
-            image: The image to paste.
+            image: The image to paste onto the background.
             background: The background image.
             center_width: The center width position for pasting.
             center_height: The center height position for pasting.
 
         Returns:
-            A tuple representing the coordinates of the pasted image.
+            The coordinates of the pasted image.
 
         """
 
@@ -93,7 +93,7 @@ class OverlapStrategy(ABC):
             image: The image filename.
 
         Returns:
-            A dictionary containing metadata of the processed partition.
+            The metadata of the processed partition.
 
         """
 
@@ -224,10 +224,10 @@ class OverlapStrategy(ABC):
         """Create the background boxes.
 
         Args:
-            boxes: A list of bounding boxes.
+            boxes: The bounding boxes.
 
         Returns:
-            A list of background bounding boxes.
+            The background bounding boxes.
 
         """
 
@@ -269,7 +269,7 @@ class OverlapStrategy(ABC):
 
             placed = False
 
-            for box_size in sorted(self.anchor, reverse=True):
+            for box_size in sorted(self.default, reverse=True):
                 if is_placeable(start_x, start_y, box_size):
                     box = place(start_x, start_y, box_size)
                     background_boxes.append(box)
@@ -309,10 +309,10 @@ class OverlapStrategy(ABC):
         """Convert image masks to bounding boxes.
 
         Args:
-            masks: An array of image masks.
+            masks: The image masks.
 
         Returns:
-            An array of bounding boxes.
+            The bounding boxes.
 
         """
 

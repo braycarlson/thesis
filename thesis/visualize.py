@@ -22,10 +22,10 @@ if TYPE_CHECKING:
 class VisualizationStrategy(ABC):
     @abstractmethod
     def visualize(self, axes: plt.Axes) -> None:
-        """Visualize the output of a model using Matplotlib axes.
+        """The base class for visualization strategies.
 
         Args:
-            axes: The Matplotlib axes to use for visualization.
+            axes: The axes to use for the visualization.
 
         """
 
@@ -46,10 +46,12 @@ class ClassAgnosticSingleShotStrategy(VisualizationStrategy):
         self.image = target.get('image')
 
     def visualize(self, axes: plt.Axes) -> None:
-        """Visualize target and prediction bounding boxes for images.
+        """The visualization of the CASSD model during training.
+
+        Create a visualization for target and prediction bounding boxes.
 
         Args:
-            axes: The Matplotlib axes to use for visualization.
+            axes: The axes to use for visualization.
 
         """
 
@@ -103,13 +105,13 @@ class ClassAgnosticSingleShotStrategy(VisualizationStrategy):
         labels: npt.NDArray,
         edgecolor: str
     ) -> None:
-        """Draw bounding boxes on a Matplotlib axes.
+        """Draw the bounding boxes on an axes.
 
         Args:
-            ax: The Matplotlib axes to draw bounding boxes on.
-            boxes: A list of bounding boxes.
-            labels: An array of labels corresponding to the bounding boxes.
-            edgecolor: The edge color of bounding boxes.
+            ax: The axes to draw bounding boxes on.
+            boxes: The bounding boxes.
+            labels: The labels corresponding to the bounding boxes.
+            edgecolor: The edge color for the bounding boxes.
 
         """
 
@@ -162,10 +164,12 @@ class ClassificationStrategy(VisualizationStrategy):
         self.target = target
 
     def visualize(self, axes: plt.Axes) -> None:
-        """Visualize images with target and prediction labels.
+        """The visualization of the classification model during training.
+
+        Create a visualization for target and prediction classes.
 
         Args:
-            axes: The Matplotlib axes to use for visualization.
+            axes: The axes to use for visualization.
 
         """
 
@@ -187,17 +191,26 @@ class ClassificationStrategy(VisualizationStrategy):
 
 
 class Visualizer:
+    """A visualizer to use during training."""
+
     def __init__(
         self,
         strategy: VisualizationStrategy | None = None
     ):
+        """Initialize the visualizer.
+
+        Args:
+            strategy: The type of visualization to use.
+
+        """
+
         self.strategy = strategy
 
     def save(self, path: Path | str) -> None:
-        """Save the visualization to a file.
+        """Save the visualization to disk.
 
         Args:
-            path: The path to save the visualization.
+            path: The location to save the visualization.
 
         """
 

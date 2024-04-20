@@ -36,7 +36,7 @@ def create(amount: int, overlap_rate: float, partition: str) -> None:
     """Create the dataset and apply it to a partition.
 
     Args:
-        amount: The amount of overlap.
+        amount: The number of digits to be placed.
         overlap_rate: The overlap rate.
         partition: The partition to apply the dataset to.
 

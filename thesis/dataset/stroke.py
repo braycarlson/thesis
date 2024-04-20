@@ -22,7 +22,7 @@ class StrokeDataset:
         self.size = size
 
     def draw(self, matrix: npt.NDArray) -> Image.Image:
-        """Draw a stroke pattern on a canvas based on the provided matrix.
+        """Draw a stroke pattern on a canvas from the provided matrix.
 
         Args:
             matrix: The matrix representing the stroke pattern.

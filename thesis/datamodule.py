@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 
 
 class DataModule(lp.LightningDataModule):
-    """A generic datamodule for a model."""
+    """A generic datamodule for a Lightning model."""
 
     def __init__(
         self,
@@ -33,7 +33,7 @@ class DataModule(lp.LightningDataModule):
         self.strategy = strategy
 
     def setup(self, stage: str | None = None) -> None:
-        """
+        """Setup a dataloader based on the stage.
 
         Args:
             stage: The name of the stage to setup for.

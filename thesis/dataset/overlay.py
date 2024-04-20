@@ -1,9 +1,3 @@
-"""
-A script meant to create several "testing" datasets using
-1-5 strokes per image. These datasets are to be used in
-the "sample.py" script
-"""
-
 from __future__ import annotations
 
 import random

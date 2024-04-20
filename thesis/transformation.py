@@ -21,16 +21,15 @@ class TransformationStrategy(ABC):
         boxes: list[tuple[int, int, int, int]] | None = None,
         mask: npt.NDArray | None = None
     ) -> npt.NDArray | tuple[npt.NDArray, list[tuple[int, int, int, int]]]:
-        """Apply transformation(s).
+        """The base class for transformation strategies.
 
         Args:
-            image: An input image array.
+            image: An input image.
             boxes: A list of bounding boxes.
             mask: An input mask array.
 
         Returns:
-            The transformed image array or a tuple containing transformed
-            image array and transformed bounding boxes.
+            The transformed image or transformed image and bounding boxes.
 
         """
 
@@ -50,13 +49,12 @@ class AlbumentationStrategy(TransformationStrategy):
         """Apply Albumentations transformation(s).
 
         Args:
-            image: An input image array.
+            image: An input image.
             boxes: A list of bounding boxes.
             _mask: A mask of the input image.
 
         Returns:
-            The transformed image array or a tuple containing transformed
-            image array and transformed bounding boxes.
+            The transformed image or transformed image and bounding boxes.
 
         """
 
@@ -83,7 +81,7 @@ class TorchvisionStrategy(TransformationStrategy):
         boxes: list[tuple[int, int, int, int]] | None = None,
         masks: npt.NDArray | None = None
     ) -> npt.NDArray | tuple[npt.NDArray, list[tuple[int, int, int, int]]]:
-        """Apply torchvision  transformation(s).
+        """Apply Torchvision  transformation(s).
 
         Args:
             image: An input image array.
@@ -91,8 +89,7 @@ class TorchvisionStrategy(TransformationStrategy):
             _mask: A mask of the input image.
 
         Returns:
-            The transformed image array or a tuple containing transformed
-            image array and transformed bounding boxes.
+            The transformed image or transformed image and bounding boxes.
 
         """
 

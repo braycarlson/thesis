@@ -20,7 +20,7 @@ class BaseDataset(Dataset):
         self.strategy = strategy
 
     def __len__(self) -> int:
-        """
+        """Get the size of the dataset.
 
         Returns:
             The size of the pandas DataFrame.

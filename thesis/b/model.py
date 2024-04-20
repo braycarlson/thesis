@@ -42,7 +42,7 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
         """Initialize the model.
 
         Args:
-            ratio: A list of aspect ratios for default boxes.
+            ratio: The aspect ratios for default boxes.
             lr: The learning rate.
 
         """
@@ -117,13 +117,13 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
         """Localize digit(s) in the image based on predicted boxes and labels.
 
         Args:
-            defaults: The predicted offsets from default boxes.
-            labels: The predicted labels.
-            score: A confidence score threshold for localization.
-            overlap: An overlap threshold for non-maximum suppression.
+            defaults: The predicted offsets relative to default bounding boxes.
+            labels: The predicted class scores.
+            score: The confidence score threshold.
+            overlap: The overlap threshold for non-maximum suppression.
 
         Returns:
-            A tuple containing lists of boxes, labels, and scores.
+            The bounding boxes, labels, and confidence scores.
 
         """
 
@@ -177,13 +177,13 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
         self,
         tensor: torch.Tensor
     ) -> tuple[list[float], list[int], list[float]]:
-        """Execute the model on the provided tensor.
+        """Execute the model on a single image or batch of images.
 
         Args:
-            tensor: An input tensor.
+            tensor: The input images.
 
         Returns:
-            A tuple containing lists of boxes, labels, and scores.
+            The bounding boxes, class labels, and scores.
 
         """
 
@@ -215,13 +215,14 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
         self,
         x: torch.Tensor
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        """A forward pass of the CASSD model.
+        """A forward pass through the CASSD model.
 
         Args:
-            x: An input tensor.
+            x: The input images.
 
         Returns:
-            A tuple containing localization, classification, and features.
+            The predicted offsets relative to default bounding boxes,
+            predicted class scores, and a collection of feature maps.
 
         """
 
@@ -238,14 +239,14 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
         batch: tuple[torch.Tensor, torch.Tensor],
         stage: str
     ) -> dict[str, torch.Tensor]:
-        """Perform a single step during training or validation.
+        """Perform a single step during training, validation or testing.
 
         Args:
-            batch: The input batch.
-            stage: A stage of the step (training or validation).
+            batch: The images, bounding boxes, and labels.
+            stage: The name of the stage.
 
         Returns:
-            A dictionary containing the loss.
+            The stage loss and scalar loss.
 
         """
 
@@ -288,7 +289,7 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
         """Configure the optimizer for training.
 
         Returns:
-            A dictionary of the optimizer, scheduler and loss to monitor
+            The optimizer, scheduler and loss to monitor
 
         """
 
@@ -345,13 +346,13 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
         self,
         batch: tuple[torch.Tensor, torch.Tensor]
     ) -> dict[str, Any]:
-        """Process a batch of data.
+        """Restructure a batch for training or validation.
 
         Args:
-            batch: A tuple containing image, boxes, and labels tensors.
+            batch: The images, bounding boxes, and labels.
 
         Returns:
-            A dictionary containing the target and prediction.
+            The images, bounding boxes, and labels from target and prediction.
 
         """
 
@@ -385,19 +386,19 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
 
     def _visualize(
         self,
-        output: dict[str, Any],
+        batch: dict[str, Any],
         stage: str
     ) -> None:
         """Visualize each target and prediction from a batch of data.
 
         Args:
-            output: An input target and prediction batch.
-            stage: The stage of the visualization (training or validation).
+            batch: An input target and prediction batch.
+            stage: The name of the stage.
 
         """
 
-        target = output.get('target')
-        prediction = output.get('prediction')
+        target = batch.get('target')
+        prediction = batch.get('prediction')
 
         identifier = datetime.now(tz=UTC).strftime('%H%M%S')
         epoch = str(self.current_epoch).zfill(3)
@@ -428,7 +429,7 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
             _: The index of the batch.
 
         Returns:
-            A dictionary containing the loss.
+            The stage loss and scalar loss.
 
         """
 
@@ -453,7 +454,7 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
             _: The index of the batch.
 
         Returns:
-            A dictionary containing the loss.
+            The stage loss and scalar loss.
 
         """
 
@@ -483,7 +484,7 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
             _: The index of the batch.
 
         Returns:
-            A dictionary containing the loss.
+            The stage loss and scalar loss.
 
         """
 

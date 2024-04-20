@@ -24,6 +24,15 @@ class VariableOverlapDataset:
         partition: dict[str, list[str | Path]] | None = None,
         canvas: tuple[int, int] = (128, 128)
     ):
+        """Paste image(s) onto a base image, and generate the associated metadata.
+
+        Args:
+            amount: The number of digits to be placed.
+            partition: The name of the partition.
+            canvas: The size of the canvas.
+
+        """
+
         width, height = canvas
 
         self.amount = amount
@@ -59,7 +68,7 @@ class VariableOverlapDataset:
         rate: float
     ) -> bool:
         """
-        Check if two boxes overlap.
+        Determine if two boxes overlap.
 
         Args:
             x: The coordinates of the first box.
@@ -93,12 +102,12 @@ class VariableOverlapDataset:
         """Calculate the distance of a point from existing clusters.
 
         Args:
-            cluster: A list of existing cluster positions.
+            cluster: The existing cluster positions.
             minimum: The minimum distance allowed.
             maximum: The maximum distance allowed.
 
         Returns:
-            A tuple representing the coordinates of the new point.
+            The coordinates of the new point.
 
         """
 
@@ -137,7 +146,7 @@ class VariableOverlapDataset:
             partition: The partition of the dataset.
 
         Returns:
-            A dictionary containing metadata of the processed partition.
+            The metadata of the processed partition.
 
         """
 

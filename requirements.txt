@@ -21,7 +21,6 @@ scipy
 screeninfo
 seaborn
 tables
-# torchinfo
 tensorboard
 tensorflow
 torchmetrics[detection]

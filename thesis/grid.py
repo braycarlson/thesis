@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 class GridStrategy(ABC):
-    """Abstract base class for grid strategies."""
+    """The base class for grid strategies."""
 
     def __init__(
         self,
@@ -29,14 +29,14 @@ class GridStrategy(ABC):
 
     @abstractmethod
     def generate(self, maximum: int = 0, zoom: int = 2) -> None:
-        """Generate the grid visualization.
+        """Generate the visualization.
 
         Args:
             maximum: The maximum number of images per row/column in the grid.
-            zoom: The zoom factor for the grid visualization.
+            zoom: The zoom factor for the visualization.
 
         Returns:
-            The generated grid visualization.
+            The grid of images.
 
         """
 
@@ -44,12 +44,10 @@ class GridStrategy(ABC):
 
     @abstractmethod
     def save(self, filename: str, *args, **kwargs) -> None:
-        """Save the grid visualization to a file.
+        """Save the visualization to disk.
 
         Args:
-            filename: The name of the file to save the grid visualization as.
-            *args: Additional positional arguments.
-            **kwargs: Additional keyword arguments.
+            filename: The name of the file to save the visualization as.
 
         """
 
@@ -57,12 +55,12 @@ class GridStrategy(ABC):
 
     @abstractmethod
     def show(self) -> None:
-        """Display the grid visualization."""
+        """Display the visualization."""
 
         raise NotImplementedError
 
     def cleanup(self) -> None:
-        """Close all of images handles."""
+        """Close each opened of handle."""
 
         for image in self.images:
             image.close()
@@ -90,20 +88,20 @@ class GridStrategy(ABC):
 
 
 class MatplotlibGrid(GridStrategy):
-    """Matplotlib grid strategy."""
+    """The Matplotlib grid strategy."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def generate(self, maximum: int = 0, zoom: int = 2) -> tuple[Figure, Axes]:
-        """Generate the grid visualization using Matplotlib.
+        """Generate the visualization using Matplotlib.
 
         Args:
             maximum: The maximum number of images per row/column in the grid.
-            zoom: The zoom factor for the grid visualization.
+            zoom: The zoom factor for the visualization.
 
         Returns:
-            A tuple containing the Matplotlib figure and axes.
+            The Matplotlib figure and axes.
 
         """
 
@@ -171,12 +169,10 @@ class MatplotlibGrid(GridStrategy):
         return fig, ax
 
     def save(self, filename: str, *args, **kwargs) -> None:
-        """Save the grid visualization using Matplotlib.
+        """Save the visualization using Matplotlib.
 
         Args:
-            filename: The name of the file to save the grid visualization to.
-            *args: Additional positional arguments.
-            **kwargs: Additional keyword arguments.
+            filename: The name of the file to save the visualization to.
 
         """
 
@@ -193,7 +189,7 @@ class MatplotlibGrid(GridStrategy):
         plt.close()
 
     def show(self) -> None:
-        """Display the grid visualization using Matplotlib."""
+        """Display the visualization using Matplotlib."""
 
         plt.tight_layout()
         plt.show()
@@ -206,11 +202,11 @@ class PillowGrid(GridStrategy):
         super().__init__(*args, **kwargs)
 
     def generate(self, maximum: int = 0, zoom: int = 2) -> Image.Image:
-        """Generate the grid visualization using PIL.
+        """Generate the visualization using PIL.
 
         Args:
             maximum: The maximum number of images per row/column in the grid.
-            zoom: The zoom factor for the grid visualization.
+            zoom: The zoom factor for the visualization.
 
         Returns:
             A PIL Image.
@@ -317,19 +313,17 @@ class PillowGrid(GridStrategy):
         return image
 
     def save(self, filename: str, *args, **kwargs) -> None:
-        """Save the grid visualization using PIL.
+        """Save the visualization using PIL.
 
         Args:
             filename: The name of the file to save the grid visualization to.
-            *args: Positional arguments.
-            **kwargs: Keyword arguments.
 
         """
 
         self._grid.save(filename, *args, **kwargs)
 
     def show(self) -> None:
-        """Display the grid visualization using PIL."""
+        """Display the visualization using PIL."""
         self._grid.show()
 
 
@@ -341,7 +335,7 @@ class Grid:
 
     @property
     def images(self) -> list[Image.Image]:
-        """A list of images to be displayed in the grid."""
+        """A list of images to be displayed on the grid."""
 
         return self.strategy.images
 
@@ -350,16 +344,16 @@ class Grid:
         self.strategy.images = images
 
     def generate(self, *args, **kwargs) -> Image.Image | tuple[Figure, Axes]:
-        """Generate the grid visualization."""
+        """Generate the visualization."""
 
         return self.strategy.generate(*args, **kwargs)
 
     def save(self, filename: str, *args, **kwargs) -> None:
-        """Save the grid visualization to a file."""
+        """Save the visualization to disk."""
 
         self.strategy.save(filename, *args, **kwargs)
 
     def show(self) -> None:
-        """Display the grid visualization."""
+        """Display the visualization."""
 
         self.strategy.show()

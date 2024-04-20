@@ -49,10 +49,10 @@ class FlexibleOverlapDataset(OverlapStrategy):
 
         Args:
             base: A path to the base image.
-            images: A list of paths to the images to be pasted.
+            images: The path(s) to the images to be pasted.
 
         Returns:
-            A dictionary containing metadata associated with the pasted images.
+            The metadata associated with the pasted images.
 
         """
 
@@ -149,7 +149,7 @@ def create(amount: int, rate: float, partition: str) -> None:
     """Create the dataset and apply it to a partition.
 
     Args:
-        amount: The amount of overlap.
+        amount: The number of digits to be placed.
         rate: The overlap rate.
         partition: The partition to apply the dataset to.
 

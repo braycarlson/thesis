@@ -50,7 +50,7 @@ class SegmentDataset:
         return 'segment'
 
     def _is_threshold(self, segment: npt.NDArray) -> bool:
-        """Determine if a segment meets the threshold for being considered sufficient.
+        """Determine if a segment meets the threshold.
 
         Args:
             segment: The segment array.
@@ -120,7 +120,7 @@ class SegmentDataset:
             path: The path to the image.
 
         Returns:
-            A tuple containing the top, bottom, left, and right segments.
+            The top, bottom, left, and right segments.
 
         """
 

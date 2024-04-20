@@ -54,7 +54,7 @@ class OverlayDataset:
             image: The image filename.
 
         Returns:
-            A dictionary containing metadata of the processed partition.
+            The metadata of the processed partition.
 
         """
 
@@ -111,7 +111,7 @@ class OverlayDataset:
             partition: The partition of the dataset.
 
         Returns:
-            A list of metadata dictionaries for the pasted strokes.
+            The metadata for the pasted strokes.
 
         """
 

@@ -22,10 +22,10 @@ def collate_fn(
     """A collate function for data loading.
 
     Args:
-        batch: A list of tuples containing images, boxes, and labels.
+        batch: A batch of images, bounding boxes, and labels.
 
     Returns:
-        A tuple containing images, boxes, and labels.
+        The images, bounding boxes, and labels.
 
     """
 
@@ -60,7 +60,7 @@ class DataModule(lp.LightningDataModule):
         self.strategy = strategy
 
     def setup(self, stage: str | None = None) -> None:
-        """
+        """Setup a dataloader based on the stage.
 
         Args:
             stage: The name of the stage to setup for.

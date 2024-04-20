@@ -70,13 +70,13 @@ class ClassificationModel(lp.LightningModule):
         )
 
     def execute(self, tensor: torch.Tensor) -> torch.Tensor:
-        """Execute the model on the provided tensor.
+        """Execute the model on an image.
 
         Args:
-            tensor: An input tensor.
+            tensor: An input image.
 
         Returns:
-            The output tensor.
+            The raw output class scores.
 
         """
 
@@ -90,14 +90,14 @@ class ClassificationModel(lp.LightningModule):
         batch: tuple[torch.Tensor, torch.Tensor],
         stage: str
     ) -> dict[str, torch.Tensor]:
-        """Perform a single step during training or validation.
+        """Perform a single step during training, validation or testing.
 
         Args:
-            batch: The input batch.
-            stage: A stage of the step (training or validation).
+            batch: An input batch of images and labels.
+            stage: The name of the stage.
 
         Returns:
-            A dictionary containing the loss.
+            The scalar loss.
 
         """
 
@@ -132,8 +132,8 @@ class ClassificationModel(lp.LightningModule):
         """Visualize each prediction from a batch of data.
 
         Args:
-            batch: An input batch.
-            stage: The stage of the visualization (training or validation).
+            batch: A batch of images and labels.
+            stage: The name of the stage.
 
         """
 
@@ -155,7 +155,12 @@ class ClassificationModel(lp.LightningModule):
         visualizer.save(path)
 
     def configure_optimizers(self) -> Any:
-        """Configure the optimizer for training."""
+        """Configure the optimizer for training.
+
+        Returns:
+            The optimizer used during training.
+
+        """
 
         lr = self.lr
 
@@ -165,13 +170,13 @@ class ClassificationModel(lp.LightningModule):
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """A forward pass of the model.
+        """A forward pass through the classification model.
 
         Args:
-            x: An input tensor.
+            x: The input image.
 
         Returns:
-            The output tensor after passing through the model.
+            The log probabilities of each class.
 
         """
 
@@ -187,11 +192,11 @@ class ClassificationModel(lp.LightningModule):
         """Perform a single testing step.
 
         Args:
-            batch: An input batch.
+            batch: A batch of images and labels.
             _: The index of the batch.
 
         Returns:
-            A dictionary containing the loss.
+            The scalar loss.
 
         """
 
@@ -210,11 +215,11 @@ class ClassificationModel(lp.LightningModule):
         """Perform a single training step.
 
         Args:
-            batch: An input batch.
+            batch: A batch of images and labels.
             _: The index of the batch.
 
         Returns:
-            A dictionary containing the loss.
+            The scalar loss.
 
         """
 
@@ -241,11 +246,11 @@ class ClassificationModel(lp.LightningModule):
         """Perform a single validation step.
 
         Args:
-            batch: An input batch.
+            batch: A batch of images and labels.
             _: The index of the batch.
 
         Returns:
-            A dictionary containing the loss.
+            The scalar loss.
 
         """
 

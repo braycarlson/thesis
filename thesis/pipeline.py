@@ -28,6 +28,8 @@ if TYPE_CHECKING:
 
 
 class Pipeline:
+    """The data pipeline to test the performance of each model."""
+
     def __init__(
         self,
         classification: tuple[ClassificationModel, TorchvisionStrategy] | None = None,
@@ -37,6 +39,18 @@ class Pipeline:
         localization: tuple[Any, TorchvisionStrategy] = (None, None),
         visualize: bool = False,
     ):
+        """Initialize the pipeline.
+
+        Args:
+            classification: The classification model and its transformation(s).
+            converter: The coordinates converter to convert to xyxy.
+            dataframe: The dataset of images, bounding boxes, etc.
+            device: The device to run the inference on.
+            localization: The CASSD model and its transformation(s).
+            visualize: Show the output of each prediction.
+
+        """
+
         self.classification = classification
         self.converter = converter
         self.dataframe = dataframe
@@ -45,13 +59,13 @@ class Pipeline:
         self.visualize = visualize
 
     def _classify(self, segment: npt.NDArray) -> tuple[npt.NDArray, float]:
-        """Classify a digit within a bounding box.
+        """Classify the digit within the bounding box.
 
         Args:
-            segment: The image to be classified.
+            segment: The digit to be classified.
 
         Returns:
-            A tuple containing the predicted label and confidence score.
+            The predicted label and confidence score.
 
         """
 
@@ -82,13 +96,13 @@ class Pipeline:
         return torch.argmax(logits, dim=1).item()
 
     def _localize(self, image: npt.NDArray) -> list[tuple[int, int, int, int]]:
-        """Localize digit(s) within an image.
+        """Localize the digit(s) within an image.
 
         Args:
-            image: The image to localize digit(s) in.
+            image: The image to be used to localize digit(s).
 
         Returns:
-            A list of bounding boxes representing the localized digit(s).
+            The bounding boxes of the localized digit(s).
 
         """
 

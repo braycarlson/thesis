@@ -12,6 +12,14 @@ if TYPE_CHECKING:
 
 class KeyboardInterruptTrialCallback(Callback):
     def __init__(self, interrupt: Key = keyboard.Key.f10, tuning: bool = False):
+        """Initialize the interrupt callback.
+
+        Args:
+            key: The keyboard key to interrupt training or tuning.
+            tuning: Differentiate between training or tuning.
+
+        """
+
         self.interrupt = interrupt
         self.listener = keyboard.Listener(on_press=self.on_press)
         self.interrupted = False
@@ -21,10 +29,10 @@ class KeyboardInterruptTrialCallback(Callback):
         """Stop training if the interrupt key was pressed.
 
         Args:
-            key: The key that was pressed.
+            key: The keyboard key that was pressed.
 
         Returns:
-            A boolean if the interrupt key was pressed to stop the listener.
+            True if the interrupt key was pressed, False otherwise.
 
         """
 

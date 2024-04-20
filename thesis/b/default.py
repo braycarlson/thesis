@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class DefaultConfiguration:
-    """The configuration for creating default boxes"""
+    """The configuration for creating default boxes."""
 
     def __init__(
         self,
@@ -21,14 +21,14 @@ class DefaultConfiguration:
         maximum: float = 1.0,
         size: tuple[int, int, int, int] = (1, 1, 128, 128)
     ):
-        """Initialize the configuration.
+        """Initialize the default box configuration.
 
         Args:
             base: The base component.
             auxiliary: The auxiliary component.
-            ratio: The aspect ratios.
-            minimum: The minimum scale.
-            maximum: The maximum scale.
+            ratio: The aspect ratios for the default boxes.
+            minimum: The minimum scale for the default boxes.
+            maximum: The maximum scale for the default boxes.
             size: The size of the input.
 
         """
@@ -99,13 +99,13 @@ class DefaultConfiguration:
 
 
 class DefaultGenerator:
-    """The generator for creating default boxes"""
+    """The generator for creating default boxes."""
 
     def __init__(self, configuration: DefaultConfiguration):
         """Initialize the configuration.
 
         Args:
-            configuration: The configuration instance.
+            configuration: The configuration used to generate default boxes.
 
         """
 
@@ -115,7 +115,7 @@ class DefaultGenerator:
         """Generate default boxes based on the configuration.
 
         Returns:
-            A tensor containing default boxes.
+            The default boxes.
 
         """
 

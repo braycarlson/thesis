@@ -17,11 +17,11 @@ if TYPE_CHECKING:
 
 
 class ModelFactory:
-    """Get a model based on its name"""
+    """Get a model and its transformation based on its name"""
 
     @staticmethod
     def get_model(name: str) -> Any:
-        """
+        """Get the preloaded model and its transformation.
 
         Args:
             name: The name of the model.

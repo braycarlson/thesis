@@ -50,13 +50,13 @@ class MultiBoxLoss(nn.Module):
         """Compute the Multi-Box Loss.
 
         Args:
-            x: The predicted localization tensor(s).
-            y: The predicted classification tensor(s).
-            boxes: A list of bounding boxes.
-            labels: A list of labels.
+            x: The predicted coordinates as offsets to default boxes.
+            y: The predicted class scores for the default boxes.
+            boxes: The ground-truth bounding boxes for each image.
+            labels: The ground-truth labels for each image.
 
         Returns:
-            The total computed loss.
+            The weighted loss as a scalar.
 
         """
 

@@ -20,7 +20,7 @@ class ClassificationDataset(BaseDataset):
         """Initialize the dataset for training.
 
         Args:
-            size: A tuple representing the size of the images.
+            size: The size of the images.
 
         """
 
@@ -35,7 +35,7 @@ class ClassificationDataset(BaseDataset):
             index: The index of the item.
 
         Returns:
-            A tuple containing the image and its label.
+            The image and its label.
 
         """
 

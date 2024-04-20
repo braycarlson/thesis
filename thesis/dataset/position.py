@@ -28,7 +28,7 @@ def rotate(
         center: The center of rotation as a tuple (x, y).
 
     Returns:
-        A tuple containing the coordinates of the rotated point.
+        The coordinates of the rotated point.
 
     """
 
@@ -56,7 +56,7 @@ def translate(x: float, y: float, dx: float, dy: float) -> tuple[float, float]:
         dy: The y-offset.
 
     Returns:
-        A tuple containing the translated coordinates of the point.
+        The translated coordinates of the point.
 
     """
 
@@ -71,7 +71,7 @@ def adjust(x: float, y: float) -> tuple[float, float]:
         y: The y-coordinate of the point.
 
     Returns:
-        A tuple containing the adjusted coordinates of the point.
+        The adjusted coordinates of the point.
 
     """
 
@@ -91,14 +91,14 @@ def transform(
     positions: list[tuple[float, float]],
     angle: float
 ) -> list[tuple[float, float]]:
-    """Apply rotation and translation to a list of positions.
+    """Apply rotation and translation to the position(s).
 
     Args:
-        positions: A list of initial positions as tuples (x, y).
+        positions: The initial positions as tuples (x, y).
         angle: The angle of rotation in degrees.
 
     Returns:
-        A list containing the transformed positions.
+        The transformed positions.
 
     """
 
@@ -128,7 +128,7 @@ def precompute(overlap: float, count: int) -> tuple[tuple[int, int], ...]:
         count: The number of positions to precompute.
 
     Returns:
-        A tuple containing precomputed positions.
+        The precomputed position(s).
 
     """
 
@@ -152,13 +152,13 @@ def precompute(overlap: float, count: int) -> tuple[tuple[int, int], ...]:
         return 0 <= x < CANVAS[0] - width and 0 <= y < CANVAS[1] - height
 
     def _position(distance: int) -> list[tuple[int, int]]:
-        """Generate positions based on a given distance.
+        """Generate the position(s) based on a given distance.
 
         Args:
             distance: The distance from the center.
 
         Returns:
-            A list of positions within the distance from the center.
+            The position(s) within the distance from the center.
 
         """
 

@@ -16,7 +16,7 @@ class Base(nn.Module):
         """Initialize the base component.
 
         Args:
-            channel: A list of filters.
+            channel: The number of filter(s) for each convolutional layer.
 
         """
 
@@ -65,10 +65,10 @@ class Base(nn.Module):
         """A forward pass of the base component.
 
         Args:
-            x: An input tensor.
+            x: An image or feature map from the previous layer.
 
         Returns:
-            A tuple containing the output tensor and intermediate features.
+            The last feature map and intermediate feature maps.
 
         """
 
@@ -92,7 +92,7 @@ class Auxiliary(nn.Module):
         """Initialize the auxiliary component.
 
         Args:
-            channel: A list of filters.
+            channel: The number of filter(s) for each convolutional layer.
 
         """
 
@@ -128,10 +128,10 @@ class Auxiliary(nn.Module):
         """A forward pass of the auxiliary component.
 
         Args:
-            x: An input tensor.
+            x: The feature maps from the previous layer.
 
         Returns:
-            A list containing intermediate features.
+            The intermediate feature maps.
 
         """
 
@@ -155,7 +155,7 @@ class Prediction(nn.Module):
         """Initialize the prediction component.
 
         Args:
-            configuration: The default box configuration instance.
+            configuration: The configuration for the default boxes.
 
         """
 
@@ -201,11 +201,11 @@ class Prediction(nn.Module):
         """The postprocessing step of the tensor.
 
         Args:
-            x: An input tensor.
-            k: The size parameter.
+            x: The feature maps from the previous layer.
+            k: The depth of the tensor.
 
         Returns:
-            The postprocessed tensor.
+            The reshaped tensor for predicting bounding boxes and class scores.
 
         """
 
@@ -218,10 +218,10 @@ class Prediction(nn.Module):
         """A forward pass of the prediction component.
 
         Args:
-            x: A list containing intermediate features.
+            x: The feature maps from the previous layer.
 
         Returns:
-            A tuple containing localization and classification logits.
+            The bounding boxes and class scores across all feature maps.
 
         """
 
