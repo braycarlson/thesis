@@ -9,7 +9,7 @@ The accurate detection and classification of occluded objects in images present 
 </p>
 
 <p align="center">
-    <img src="asset/collision.gif" alt="A demonstration of overlapping digits" width="100%"/>
+    <img src="asset/collision.gif" alt="A demonstration of overlapping digits" width="75%"/>
 </p>
 
 ## Prerequisites
