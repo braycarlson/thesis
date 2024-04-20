@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import random
+import scienceplots
 import torch
 import warnings
 
@@ -36,6 +37,10 @@ warnings.filterwarnings(
 
 
 def main() -> None:
+    plt.style.use('science')
+
+    save = False
+
     model, transformation = ModelFactory.get_model('cassd')
 
     strategy = ScalarStrategy(128, 128)
@@ -100,7 +105,7 @@ def main() -> None:
 
                 ax.imshow(image.squeeze(), cmap='gray')
 
-                tensor = strategy.apply(image=image).unsqueeze(0)
+                tensor = transformation.apply(image=image).unsqueeze(0)
                 tensor = tensor.to(model.device)
 
                 model.eval()
@@ -187,7 +192,12 @@ def main() -> None:
             grid = MatplotlibGrid(images=images, title=title)
 
             grid.generate()
-            grid.save(path)
+
+            if save:
+                grid.save(path)
+            else:
+                grid.show()
+
             grid.cleanup()
 
 

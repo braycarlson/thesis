@@ -159,7 +159,8 @@ def main() -> None:
                 else:
                     image = (image - image.mean()) / image.std() + 0.5
 
-                fig, ax = plt.subplots()
+                figsize = (8, 8)
+                fig, ax = plt.subplots(1, figsize=figsize)
 
                 ax.imshow(image.squeeze(), cmap='gray')
 
