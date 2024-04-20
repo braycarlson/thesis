@@ -21,7 +21,7 @@ class ModelFactory:
 
     @staticmethod
     def get_model(name: str) -> Any:
-        """Get the preloaded model and its transformation.
+        """Get the preloaded model and its transformation(s).
 
         Args:
             name: The name of the model.
