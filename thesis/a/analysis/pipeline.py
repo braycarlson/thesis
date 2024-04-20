@@ -40,7 +40,7 @@ class Pipeline:
         """Classify a segment of an image.
 
         Args:
-            segment: A segment of an image represented as a numpy array.
+            segment: A segment of an image.
 
         Returns:
             The predicted label for the segment.
@@ -75,7 +75,7 @@ class Pipeline:
         """Visualize an image and its prediction.
 
         Args:
-            data: A dictionary containing the input image and prediction.
+            data: The input image and its prediction.
 
         """
 
@@ -104,7 +104,7 @@ class Pipeline:
         plt.close()
 
     def run(self) -> None:
-        """Run the image classification pipeline.
+        """Run the classification pipeline.
 
         Returns:
             The metadata containing file, target, prediction, and accuracy.

@@ -29,7 +29,7 @@ if TYPE_CHECKING:
 
 class Visualizer:
     def __init__(self, model: nn.Module):
-        """Initializes the Visualizer with a given model.
+        """Initializes the visualizer with a model.
 
         Args:
             model: A model from which the visualizer will extract data.
@@ -49,7 +49,7 @@ class Visualizer:
             tensor: The input tensor to the model.
 
         Returns:
-            A list containing extracted features or filters.
+            The extracted features or filters.
 
         """
 
@@ -115,7 +115,7 @@ class Visualizer:
             tensor: The input tensor to the model.
 
         Returns:
-            A list containing extracted features.
+            The extracted features.
 
         """
 
@@ -172,7 +172,7 @@ class Visualizer:
         return outputs
 
     def filters(self) -> None:
-        """Visualize the filters of convolutional layers in the model."""
+        """Visualize the filter(s) of convolutional layer(s) in the model."""
 
         # mpl.rcParams['text.color'] = '#ffffff'
 
@@ -237,7 +237,7 @@ class Visualizer:
             tensor: The input tensor to the model.
 
         Returns:
-            A list containing extracted features.
+            The extracted features.
 
         """
 
@@ -298,7 +298,7 @@ def main() -> None:
         .reset_index(drop=True)
     )
 
-    files = dataframe.file.to_list()[:1]
+    files = dataframe.file.to_list()
 
     visualizer = Visualizer(model=model)
 
@@ -314,7 +314,9 @@ def main() -> None:
 
         path = destination.joinpath(CWD.joinpath(file).stem + '.png')
 
-        fig, ax = plt.subplots(figsize=(6, 6))
+        figsize = (6, 6)
+        fig, ax = plt.subplots(figsize=figsize)
+
         ax.imshow(image, cmap='gray')
         ax.axis('off')
 
@@ -331,17 +333,13 @@ def main() -> None:
         tensor = transformation.apply(image=image).unsqueeze(0)
         tensor = tensor.to(model.device)
 
-        # visualizer.defaults()
-
-        # layer = visualizer.features('base', tensor)
-        # layer = layer[-1]
-        # visualizer.features('auxiliary', layer)
+        visualizer.defaults()
 
         layer = visualizer.single('base', tensor)
         layer = layer[-1]
         visualizer.single('auxiliary', layer)
 
-        # visualizer.filters()
+        visualizer.filters()
 
 
 if __name__ == '__main__':

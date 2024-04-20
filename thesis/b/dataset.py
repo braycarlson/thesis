@@ -53,7 +53,7 @@ class SingleShotDetectorDataset(BaseLocalizationDataset):
             index: The index of the item.
 
         Returns:
-            The image, bounding box, and label.
+            The image, bounding boxes, and labels.
 
         """
 

@@ -25,6 +25,18 @@ class PerformanceAnalyzer:
         n_jobs: int = 10,
         subset: int | None = None
     ):
+        """Initialize the performance analyzer.
+
+        Args:
+            classification: The classification model and its transformation(s).
+            n_jobs: The number of job(s) to use for parallelization.
+            subset: The number for segmenting the dataset.
+
+        Returns:
+            The predicted label for the segment.
+
+        """
+
         self.model, self.transformation = classification
         self.n_jobs = n_jobs
         self.subset = subset
@@ -33,7 +45,7 @@ class PerformanceAnalyzer:
         """Classify a segment of an image.
 
         Args:
-            segment: A segment of an image represented as a numpy array.
+            segment: A segment of an image.
 
         Returns:
             The predicted label for the segment.
@@ -72,7 +84,7 @@ class PerformanceAnalyzer:
             stroke: The name of the dataset.
 
         Returns:
-            A dictionary containing analysis metadata.
+            The analysis metadata.
 
         """
 
@@ -126,7 +138,7 @@ class PerformanceAnalyzer:
         return metadata
 
     def all(self) -> None:
-        """Perform analysis on all datasets."""
+        """Perform analysis on each dataset."""
 
         strokes = [
             str(i).zfill(2)
