@@ -39,7 +39,7 @@ ANALYSIS.mkdir(exist_ok=True, parents=True)
 ANIMATION = CWD.joinpath('thesis/animation')
 ANIMATION.mkdir(exist_ok=True, parents=True)
 
-FIGURES = ANALYSIS.joinpath('figures')
+FIGURES = CWD.joinpath('thesis/figures')
 FIGURES.mkdir(exist_ok=True, parents=True)
 
 SEGMENT = DATASET.joinpath('segment')
@@ -104,6 +104,8 @@ NORMALIZE = {
 
 monitor = get_monitors()[0]
 WIDTH, HEIGHT = monitor.width, monitor.height
+
+SIZE = 128
 
 RATIO = [
     [0.3, 0.6, 0.8, 1.0, 1.1, 1.2, 1.4, 1.5, 1.6, 2.0, 3.0, 4.0],

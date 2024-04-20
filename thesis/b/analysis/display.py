@@ -44,7 +44,7 @@ def main() -> None:
         width, height = x_max - x_min, y_max - y_min
 
         i = (index + 1) % len(COLOR)
-        edgecolor = COLOR[i]
+        edgecolor = backgroundcolor = COLOR[i]
 
         rectangle = patches.Rectangle(
             (x_min, y_min),
@@ -61,18 +61,10 @@ def main() -> None:
             x_min,
             y_min,
             f"{label}: {score:.2f}",
-            backgroundcolor='red',
+            backgroundcolor=backgroundcolor,
             color='white',
             fontsize=8
         )
-
-    figure_width, figure_height = fig.get_size_inches() * fig.dpi
-
-    x = (WIDTH - figure_width) // 2
-    y = (HEIGHT - figure_height) // 2
-    y = y - 50
-
-    plt.get_current_fig_manager().window.wm_geometry(f"+{int(x)}+{int(y)}")
 
     plt.tight_layout()
     plt.axis('off')
@@ -86,6 +78,14 @@ def main() -> None:
             transparent=False
         )
     else:
+        figure_width, figure_height = fig.get_size_inches() * fig.dpi
+
+        x = (WIDTH - figure_width) // 2
+        y = (HEIGHT - figure_height) // 2
+        y = y - 50
+
+        plt.get_current_fig_manager().window.wm_geometry(f"+{int(x)}+{int(y)}")
+
         plt.show(block=True)
 
     plt.close()

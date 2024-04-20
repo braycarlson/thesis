@@ -13,8 +13,8 @@ from thesis.constant import (
     ANALYSIS,
     COLOR,
     CWD,
+    FLEXIBLE,
     HEIGHT,
-    PIPELINE,
     WIDTH
 )
 from thesis.coordinates import CoordinatesConverter, ScalarStrategy
@@ -43,7 +43,7 @@ class Pipeline:
 
         Args:
             classification: The classification model and its transformation(s).
-            converter: The coordinates converter to convert to xyxy.
+            converter: The coordinates converter to convert boxes to xyxy.
             dataframe: The dataset of images, bounding boxes, etc.
             device: The device to run the inference on.
             localization: The CASSD model and its transformation(s).
@@ -315,7 +315,7 @@ def main() -> None:
             amount = str(i).zfill(2)
             overlap = str(j * 10).zfill(2)
 
-            pickle = PIPELINE.joinpath(amount, overlap, 'testing.pkl')
+            pickle = FLEXIBLE.joinpath(amount, overlap, 'testing.pkl')
             dataframe = pd.read_pickle(pickle)
 
             pipeline = Pipeline(

@@ -11,8 +11,8 @@ from thesis.constant import (
     CWD,
     COLOR,
     FIGURES,
+    FLEXIBLE,
     HEIGHT,
-    VARIABLE,
     WIDTH
 )
 from thesis.factory import ModelFactory
@@ -25,10 +25,10 @@ def main() -> None:
 
     model, transformation = ModelFactory.get_model('cassd')
 
-    pickle = VARIABLE.joinpath('testing.pkl')
+    pickle = FLEXIBLE.joinpath('03', '40', 'testing.pkl')
     dataframe = pd.read_pickle(pickle)
 
-    random_state = 1
+    random_state = 42
 
     dataframe = (
         dataframe
@@ -38,7 +38,7 @@ def main() -> None:
 
     files = dataframe.file.to_list()
 
-    for i, file in enumerate(files, 0):
+    for index, file in enumerate(files, 0):
         path = CWD.joinpath(file).as_posix()
 
         with Image.open(path).convert('L') as image:
@@ -58,27 +58,18 @@ def main() -> None:
 
         for j, (box, label, score) in enumerate(iterable, 0):
             x_min, y_min, x_max, y_max = box
-
-            linewidth = 2
-            offset = linewidth / 2
-
-            x_min = max(0 + offset, x_min)
-            y_min = max(0 + offset, y_min)
-            x_max = min(128 - offset, x_max)
-            y_max = min(128 - offset, y_max)
-
             width, height = x_max - x_min, y_max - y_min
 
-            k = (j + 1) % len(COLOR)
-            backgroundcolor = edgecolor = COLOR[k]
+            i = (j + 1) % len(COLOR)
+            edgecolor = backgroundcolor = COLOR[i]
 
             rectangle = patches.Rectangle(
-                (x_min - offset, y_min - offset),
+                (x_min, y_min),
                 width,
                 height,
                 edgecolor=edgecolor,
                 facecolor='none',
-                linewidth=linewidth
+                linewidth=2
             )
 
             ax.add_patch(rectangle)
@@ -96,17 +87,14 @@ def main() -> None:
         plt.axis('off')
 
         if save:
-            name = str(i).zfill(3)
-            filename = name + '.png'
-
+            filename = str(index).zfill(2) + '.png'
             path = FIGURES.joinpath(filename)
 
             plt.savefig(
                 path,
                 bbox_inches='tight',
                 dpi=300,
-                format='png',
-                transparent=True
+                format='png'
             )
         else:
             figure_width, figure_height = fig.get_size_inches() * fig.dpi

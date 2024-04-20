@@ -11,8 +11,8 @@ from PIL import Image
 from thesis.constant import (
     ANALYSIS,
     CWD,
+    FLEXIBLE,
     HEIGHT,
-    PIPELINE,
     WIDTH
 )
 from thesis.coordinates import (
@@ -285,9 +285,11 @@ class Visualizer:
 
 
 def main() -> None:
+    save = False
+
     model, transformation = ModelFactory.get_model('cassd')
 
-    pickle = PIPELINE.joinpath('03', '40', 'testing.pkl')
+    pickle = FLEXIBLE.joinpath('03', '40', 'testing.pkl')
     dataframe = pd.read_pickle(pickle)
 
     random_state = 42
@@ -320,13 +322,24 @@ def main() -> None:
         ax.imshow(image, cmap='gray')
         ax.axis('off')
 
-        plt.savefig(
-            path,
-            bbox_inches='tight',
-            dpi=300,
-            format='png',
-            transparent=True
-        )
+        if save:
+            plt.savefig(
+                path,
+                bbox_inches='tight',
+                dpi=300,
+                format='png',
+                transparent=True
+            )
+        else:
+            figure_width, figure_height = fig.get_size_inches() * fig.dpi
+
+            x = (WIDTH - figure_width) // 2
+            y = (HEIGHT - figure_height) // 2
+            y = y - 50
+
+            plt.get_current_fig_manager().window.wm_geometry(f"+{int(x)}+{int(y)}")
+
+            plt.show()
 
         plt.close()
 
