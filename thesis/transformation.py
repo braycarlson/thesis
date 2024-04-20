@@ -25,8 +25,8 @@ class TransformationStrategy(ABC):
 
         Args:
             image: An input image.
-            boxes: A list of bounding boxes.
-            mask: An input mask array.
+            boxes: The bounding boxes.
+            mask: The image mask.
 
         Returns:
             The transformed image or transformed image and bounding boxes.
@@ -50,8 +50,8 @@ class AlbumentationStrategy(TransformationStrategy):
 
         Args:
             image: An input image.
-            boxes: A list of bounding boxes.
-            _mask: A mask of the input image.
+            boxes: The bounding boxes.
+            _mask: The image mask.
 
         Returns:
             The transformed image or transformed image and bounding boxes.
@@ -84,9 +84,9 @@ class TorchvisionStrategy(TransformationStrategy):
         """Apply Torchvision  transformation(s).
 
         Args:
-            image: An input image array.
-            boxes: A list of bounding boxes.
-            _mask: A mask of the input image.
+            image: An input image.
+            boxes: The bounding boxes.
+            _mask: The image mask.
 
         Returns:
             The transformed image or transformed image and bounding boxes.
