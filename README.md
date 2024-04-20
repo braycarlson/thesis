@@ -8,6 +8,10 @@ The accurate detection and classification of occluded objects in images present 
     <img src="asset/cassd.png" alt="CASSD" width="75%"/>
 </p>
 
+<p align="center">
+    <img src="asset/collision.gif" alt="A demonstration of overlapping digits" width="100%"/>
+</p>
+
 ## Prerequisites
 
 * [pyenv](https://github.com/pyenv/pyenv) or [Python 3.11.2](https://www.python.org/downloads/)

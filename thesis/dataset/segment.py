@@ -1,8 +1,3 @@
-"""
-A script meant to create the "main" noise dataset, which
-is to be used for training the model
-"""
-
 from __future__ import annotations
 
 import random

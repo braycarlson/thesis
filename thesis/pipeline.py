@@ -302,6 +302,8 @@ class Pipeline:
 
 
 def main() -> None:
+    plt.style.use('science')
+
     localization = ModelFactory.get_model('cassd')
     classification = ModelFactory.get_model('classification')
 

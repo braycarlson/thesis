@@ -1,6 +1,7 @@
 -e .
 
 albumentations
+h5py
 ipywidgets
 joblib
 jupyterlab
