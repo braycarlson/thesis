@@ -142,13 +142,21 @@ class ClassAgnosticSingleShotStrategy(VisualizationStrategy):
 
             ax.add_patch(rect)
 
+            text_x, text_y = (
+                x_min + 0.0025 * width,
+                y_min + 0.0025 * height
+            )
+
             ax.text(
-                x_min,
-                y_min,
-                str(label),
-                fontsize=8,
+                text_x, text_y,
+                label,
+                backgroundcolor=edgecolor,
                 color='white',
-                backgroundcolor=edgecolor
+                fontsize=12,
+                horizontalalignment='left',
+                verticalalignment='top',
+                bbox={'facecolor': edgecolor, 'edgecolor': 'none'},
+                clip_on=True
             )
 
 

@@ -49,7 +49,7 @@ class ClassAgnosticSingleShotDetector(lp.LightningModule):
 
         super().__init__()
 
-        self.batch_size = 32
+        self.batch_size = 64
         self.is_training_visualized = False
         self.is_validation_visualized = False
         self.lr = lr

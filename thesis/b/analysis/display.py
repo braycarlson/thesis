@@ -44,7 +44,7 @@ def main() -> None:
         width, height = x_max - x_min, y_max - y_min
 
         i = (index + 1) % len(COLOR)
-        edgecolor = backgroundcolor = COLOR[i]
+        edgecolor = backgroundcolor = facecolor = COLOR[i]
 
         rectangle = patches.Rectangle(
             (x_min, y_min),
@@ -57,13 +57,21 @@ def main() -> None:
 
         ax.add_patch(rectangle)
 
+        text_x, text_y = (
+            x_min + 0.025 * width,
+            y_min + 0.025 * height
+        )
+
         ax.text(
-            x_min,
-            y_min,
+            text_x, text_y,
             f"{label}: {score:.2f}",
             backgroundcolor=backgroundcolor,
             color='white',
-            fontsize=8
+            fontsize=12,
+            horizontalalignment='left',
+            verticalalignment='top',
+            bbox={'facecolor': facecolor, 'edgecolor': 'none'},
+            clip_on=True
         )
 
     plt.tight_layout()

@@ -77,7 +77,7 @@ def main() -> None:
 
     datamodule = DataModule(
         annotation=annotation,
-        batch_size=32,
+        batch_size=64,
         dataset=dataset,
         strategy=strategy
     )

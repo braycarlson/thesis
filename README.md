@@ -11,11 +11,7 @@ The accurate detection and classification of occluded objects in images present 
 
 ## Output from our CASSD Model
 <p align="center">
-    <img src="asset/prediction1.png" alt="A demonstration of our model localizing several digits" width="75%"/>
-</p>
-
-<p align="center">
-    <img src="asset/prediction2.png" alt="A demonstration of our model localizing several images in a grid" width="75%"/>
+    <img src="asset/prediction.png" alt="A demonstration of our model localizing several digits" width="75%"/>
 </p>
 
 ## Output from our CASSD and Classification Model

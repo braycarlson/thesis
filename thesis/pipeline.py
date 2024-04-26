@@ -6,6 +6,7 @@ import numpy.typing as npt
 import pandas as pd
 import torch
 
+from datetime import datetime, timezone, UTC
 from matplotlib import patches
 from PIL import Image
 from thesis.factory import ModelFactory
@@ -13,6 +14,7 @@ from thesis.constant import (
     ANALYSIS,
     COLOR,
     CWD,
+    FIGURES,
     FLEXIBLE,
     HEIGHT,
     WIDTH
@@ -121,6 +123,8 @@ class Pipeline:
 
         """
 
+        save = False
+
         segmentation = data.get('segment')
 
         amount = len(segmentation)
@@ -209,10 +213,32 @@ class Pipeline:
 
         plt.get_current_fig_manager().window.wm_geometry(f"+{int(x)}+{int(y)}")
 
-        plt.tight_layout()
         plt.axis('off')
-        plt.tight_layout()
-        plt.show(block=True)
+
+        if save:
+            time = datetime.now(UTC).strftime('%Y-%m-%d_%H-%M-%S')
+            filename = time + '_' + str(i).zfill(3) + '.png'
+
+            path = FIGURES.joinpath(filename)
+
+            plt.savefig(
+                path,
+                dpi=300,
+                format='png',
+                pad_inches=0.25,
+                transparent=False
+            )
+        else:
+            figure_width, figure_height = fig.get_size_inches() * fig.dpi
+
+            x = (WIDTH - figure_width) // 2
+            y = (HEIGHT - figure_height) // 2
+            y = y - 50
+
+            plt.get_current_fig_manager().window.wm_geometry(f"+{int(x)}+{int(y)}")
+
+            plt.show()
+
         plt.close()
 
     def run(self) -> None:
@@ -310,8 +336,8 @@ def main() -> None:
     strategy = ScalarStrategy(128, 128)
     converter = CoordinatesConverter(strategy)
 
-    for i in range(1, 9):
-        for j in range(1, 11):
+    for i in range(5, 9):
+        for j in range(4, 11):
             amount = str(i).zfill(2)
             overlap = str(j * 10).zfill(2)
 
